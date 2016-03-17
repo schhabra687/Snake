@@ -33,7 +33,7 @@ class snake implements KeyListener,ActionListener
 		l.setOpaque(true);
 		f.add(l);
 		f.add(food);
-		time = new Timer(1000,this);
+		time = new Timer(300,this);
 		time.start();
 		f.addKeyListener(this);
 		f.setVisible(true);
@@ -45,44 +45,48 @@ class snake implements KeyListener,ActionListener
 	public  void actionPerformed( ActionEvent e)
 	{
 		time_keeper++;
-		if(time_keeper==135)
+		if(time_keeper==200)
 		{
 
 			generate();
 			time_keeper=0;
 		}
-		if((x1<=x+15 && y1>=y && y1<=y+15)||(x1<=x+15 && y1+50>=y && y1+50<=y+15))
+		if((x1==x)&&(y1==y))
 		{
 			score++;
 			System.out.println("Score" + " " + score);
 			generate();
+			if((leftdir)||(rightdir))
+			width = 2*width;
+			else
+			height = 2*height;
 			time_keeper = 0;
 		}
 		if(updir)
 		{
-			l.setBounds(x1,y1-30,width,height);
-			y1 = y1 - 30;
+			l.setBounds(x1,y1-1,width,height);
+			y1 = y1 - 1;		
 			l.setBackground(Color.black);
 			l.setOpaque(true);
 		}
 		else if(downdir)
 		{
-			l.setBounds(x1,y1+30,width,height);
-			y1 = y1 + 30;
+			l.setBounds(x1,y1+1,width,height);
+			y1 = y1 + 1;
 			l.setBackground(Color.black);
 			l.setOpaque(true);
 		}
 		else if(leftdir)
 		{
-			l.setBounds(x1-30,y1,width,height);
-			x1 = x1-30;
+			l.setBounds(x1-1,y1,width,height);
+			x1 = x1-1;
 			l.setBackground(Color.black);
 			l.setOpaque(true);
 		}
 		else
 		{
-			l.setBounds(x1+30,y1,width,height);
-			x1 = x1 + 30;
+			l.setBounds(x1+1,y1,width,height);
+			x1 = x1 + 1;
 			l.setBackground(Color.black);
 			l.setOpaque(true);
 		}
@@ -97,11 +101,11 @@ class snake implements KeyListener,ActionListener
 	}
 	public void generate()
 	{
-		 x = 100 + (int)(Math.random() * ((500 - 10) + 1));
+		 x = 10 + (int)(Math.random() * ((100 - 10) + 1));
 		System.out.println(x);
-		 y = 100 + (int)(Math.random() * ((500 - 10) + 1));
+		 y = 10 + (int)(Math.random() * ((100 - 10) + 1));
 		System.out.println(y);
-		food.setBounds(x,y,15,15);
+		food.setBounds(x,y,20,20);
 		food.setBackground(Color.black);
 		food.setOpaque(true);
 	}
